@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cajero Automático - Panel Principal</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="atm-container">
+        <!-- Encabezado -->
+        <header class="atm-header">
+            <div class="user-greeting">
+                <span class="badge-status">● Cuenta Activa</span>
+                <h2>Bienvenido, <span id="nombre-usuario-display">Usuario</span></h2>
+            </div>
+            <button id="btn-logout" class="btn-logout">Cerrar Sesión</button>
+        </header>
+
+        <!-- Cuerpo Principal -->
+        <main class="atm-body">
+            <!-- Fila Superior: Tarjeta Bancaria + Gráfica Propia -->
+            <section class="dashboard-top-grid">
+                <!-- Tarjeta Bancaria -->
+                <article class="credit-card">
+                    <div class="card-top">
+                        <div class="card-chip">
+                            <div class="chip-line"></div>
+                            <div class="chip-line"></div>
+                        </div>
+                        <span class="card-brand">NEOBANK <span>PLATINUM</span></span>
+                    </div>
+
+                    <div class="card-balance-box">
+                        <div class="balance-header-row">
+                            <span class="balance-label">Saldo Disponible</span>
+                            <button type="button" id="btn-toggle-saldo" class="btn-eye">Ocultar</button>
+                        </div>
+                        <p id="saldo-display" class="balance-amount">$ 200.000</p>
+                    </div>
+
+                    <div class="card-bottom">
+                        <div>
+                            <div class="card-holder-label">TITULAR DE LA CUENTA</div>
+                            <div id="card-holder-name" class="card-holder-value">USUARIO</div>
+                        </div>
+                        <div class="card-number">•••• •••• •••• 4829</div>
+                    </div>
+                </article>
+
+                <!-- Gráfica de Flujo Hecha 100% con HTML y CSS -->
+                <article class="chart-card">
+                    <div class="chart-header">
+                        <h4>Resumen de Flujo</h4>
+                        <span class="chart-subtitle">Cálculo en tiempo real</span>
+                    </div>
+
+                    <div class="custom-bars-container">
+                        <!-- Barra de Ingresos -->
+                        <div class="bar-group">
+                            <div class="bar-labels">
+                                <span>Ingresos Totales</span>
+                                <strong id="texto-ingresos" class="text-income">$ 200.000 (100%)</strong>
+                            </div>
+                            <div class="bar-track">
+                                <div id="barra-ingresos" class="bar-fill income-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Barra de Egresos -->
+                        <div class="bar-group">
+                            <div class="bar-labels">
+                                <span>Retiros y Envíos</span>
+                                <strong id="texto-egresos" class="text-expense">$ 0 (0%)</strong>
+                            </div>
+                            <div class="bar-track">
+                                <div id="barra-egresos" class="bar-fill expense-fill" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="chart-tip" id="mensaje-financiero">Tu salud financiera está óptima.</p>
+                </article>
+            </section>
+
+            <!-- Operaciones del Cajero -->
+            <section class="operations-grid">
+                <article class="op-card">
+                    <div class="op-header">
+                        <div class="op-icon deposit-icon">+</div>
+                        <h4>Consignar Dinero</h4>
+                    </div>
+                    <p class="op-desc">Ingresa fondos inmediatos a tu cuenta.</p>
+                    <input type="number" id="input-consignar" placeholder="Monto a consignar" min="1">
+                    <button type="button" id="btn-consignar" class="btn-primary">Consignar</button>
+                </article>
+
+                <article class="op-card">
+                    <div class="op-header">
+                        <div class="op-icon withdraw-icon">-</div>
+                        <h4>Retirar Dinero</h4>
+                    </div>
+                    <p class="op-desc">Retira efectivo disponible de tu saldo.</p>
+                    <input type="number" id="input-retirar" placeholder="Monto a retirar" min="1">
+                    <button type="button" id="btn-retirar" class="btn-primary">Retirar</button>
+                </article>
+
+                <article class="op-card">
+                    <div class="op-header">
+                        <div class="op-icon transfer-icon">⇄</div>
+                        <h4>Transferir Dinero</h4>
+                    </div>
+                    <p class="op-desc">Envía dinero a otro usuario registrado.</p>
+                    <input type="text" id="input-destinatario" placeholder="Usuario destinatario (email)">
+                    <input type="number" id="input-monto-transferir" placeholder="Monto a transferir" min="1">
+                    <button type="button" id="btn-transferir" class="btn-primary">Transferir</button>
+                </article>
+            </section>
+
+            <!-- Bóveda de Metas de Ahorro -->
+            <section class="goals-section">
+                <div class="goals-header">
+                    <div>
+                        <h3>Bóveda de Metas de Ahorro</h3>
+                        <p class="goals-subtitle">Separa dinero de tu saldo principal para cumplir objetivos</p>
+                    </div>
+                    <div class="goal-creator-inline">
+                        <input type="text" id="input-meta-nombre" placeholder="Nombre de la meta">
+                        <input type="number" id="input-meta-objetivo" placeholder="Monto objetivo" min="1000">
+                        <button type="button" id="btn-crear-meta" class="btn-secondary">Crear Meta</button>
+                    </div>
+                </div>
+                <div id="contenedor-metas" class="goals-grid">
+                    <!-- Se llena desde cajero.js -->
+                </div>
+            </section>
+
+            <!-- Historial de Movimientos -->
+            <section class="movements-section">
+                <div class="movements-header">
+                    <h3>Historial de Movimientos</h3>
+                    <span class="movements-tag">Guardado en LocalStorage</span>
+                </div>
+                <ul id="lista-movimientos" class="movements-list">
+                    <li>No hay movimientos registrados.</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <!-- Contenedor para mensajes de confirmación en pantalla -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Buenas prácticas: script al final del body -->
+    <script src="js/cajero.js"></script>
+</body>
+</html>
